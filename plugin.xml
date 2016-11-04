@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-pcm-recorder"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        version="0.0.1">
+
+  <name>PCMRecorder</name>
+
+  <description>
+    This plugin is a Cordova pcm recorder plugin
+  </description>
+
+  <license>MIT</license>
+
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
+
+  <js-module src="www/PCMRecorder.js" name="PCMRecorder">
+    <clobbers target="window.plugins.pcmRecorder" />
+  </js-module>
+
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="PCMRecorder">
+        <param name="ios-package" value="PCMRecorder"/>
+      </feature>
+    </config-file>
+    <header-file src="src/ios/PCMRecorder.h"/>
+    <source-file src="src/ios/PCMRecorder.m"/>
+  </platform>
+
+  <!-- android -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="PCMRecorder">
+        <param name="android-package" value="fr.germainlemasson.plugins.PCMRecorder" />
+      </feature>
+    </config-file>
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+      <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+      <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    </config-file>
+    <source-file src="src/android/fr/germainlemasson/plugins/PCMRecorder.java" target-dir="src/fr/germainlemasson/plugins"/>
+  </platform>
+
+</plugin>
